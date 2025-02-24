@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="AddedTableThing" author="Daria Kudryashova">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="THING"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="THING">
+            <column name="ID" type="BIGSERIAL" autoIncrement="true">
+                <constraints nullable="false" primaryKey="true"/>
+            </column>
+            <column name="NAME" type="VARCHAR">
+                <constraints nullable="false"/>
+            </column>
+            <column name="COUNT" type="BIGINT" defaultValue="0">
+                <constraints nullable="false"/>
+            </column>
+            <column name="PLACE_ID" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMPTZ" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="LAST_UPDATED_DATE" type="TIMESTAMPTZ">
+                <constraints nullable="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="AddedFkForThingTable" author="Daria Kudryashova">
+        <preConditions onFail="MARK_RAN">
+            <tableExists tableName="THING"/>
+            <tableExists tableName="PLACE"/>
+        </preConditions>
+
+        <addForeignKeyConstraint baseTableName="THING"
+                                 baseColumnNames="PLACE_ID"
+                                 constraintName="THING_PLACE_FK"
+                                 referencedTableName="PLACE"
+                                 referencedColumnNames="ID"/>
+
+    </changeSet>
+</databaseChangeLog>
