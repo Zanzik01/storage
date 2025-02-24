@@ -4,6 +4,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import storage.zanzik01.converter.ThingConverter;
@@ -14,6 +15,10 @@ import storage.zanzik01.service.ThingService;
 @Tag(name = "API для работы с вещами")
 @RestController
 @RequiredArgsConstructor
+@RequestMapping(
+        path = "/thing",
+        produces = MediaType.APPLICATION_JSON_VALUE
+)
 public class ThingController {
 
     private final ThingService thingService;

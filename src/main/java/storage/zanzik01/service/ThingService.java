@@ -21,6 +21,7 @@ public class ThingService {
                 .name(thingDtoRequest.getName())
                 .count(thingDtoRequest.getCount())
                 .createdDate(OffsetDateTime.now())
+                .placeId(thingDtoRequest.getPlaceId())
                 .build());
     }
 

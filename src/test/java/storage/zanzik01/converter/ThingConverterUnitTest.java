@@ -27,7 +27,7 @@ class ThingConverterUnitTest {
                 .build();
 
         // when
-        ThingDtoResponse thingDto= ThingConverter.toThingDtoResponse(thing);
+        ThingDtoResponse thingDto = ThingConverter.toThingDtoResponse(thing);
 
         // then
         assertNotNull(thingDto);
