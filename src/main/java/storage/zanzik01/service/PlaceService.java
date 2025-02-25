@@ -1,6 +1,5 @@
 package storage.zanzik01.service;
 
-
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import storage.zanzik01.dto.PlaceDtoRequest;
@@ -8,6 +7,7 @@ import storage.zanzik01.model.Place;
 import storage.zanzik01.repository.PlaceRepository;
 
 import java.time.OffsetDateTime;
+import java.util.Optional;
 
 import static java.time.ZoneOffset.UTC;
 
@@ -30,8 +30,12 @@ public class PlaceService {
                 .orElseThrow(() -> new IllegalArgumentException("Place id not found: " + id));
     }
 
+    public Optional<Place> getPlaceByName(String name) {
+        return placeRepository.findPlaceByName(name);
+    }
+
     public Place updatePlace(long id, PlaceDtoRequest placeDtoRequest) {
-        return placeRepository.save(getPlaceById(id).builder()
+        return placeRepository.save(getPlaceById(id).toBuilder()
                 .name(placeDtoRequest.getName())
                 .description(placeDtoRequest.getDescription())
                 .lastUpdatedDate(OffsetDateTime.now(UTC))

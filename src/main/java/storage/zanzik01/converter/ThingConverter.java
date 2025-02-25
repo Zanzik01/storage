@@ -1,6 +1,7 @@
 package storage.zanzik01.converter;
 
 import lombok.experimental.UtilityClass;
+import storage.zanzik01.dto.ThingDto;
 import storage.zanzik01.dto.ThingDtoResponse;
 import storage.zanzik01.model.Thing;
 
@@ -9,6 +10,14 @@ public class ThingConverter {
 
     public ThingDtoResponse toThingDtoResponse(Thing thing) {
         return ThingDtoResponse.builder()
+                .name(thing.getName())
+                .count(thing.getCount())
+                .build();
+    }
+
+    public ThingDto toThingDto(Thing thing) {
+        return ThingDto.builder()
+                .id(thing.getId())
                 .name(thing.getName())
                 .count(thing.getCount())
                 .build();

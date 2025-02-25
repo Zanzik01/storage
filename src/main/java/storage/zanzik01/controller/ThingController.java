@@ -8,6 +8,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import storage.zanzik01.converter.ThingConverter;
+import storage.zanzik01.dto.ThingDto;
 import storage.zanzik01.dto.ThingDtoRequest;
 import storage.zanzik01.dto.ThingDtoResponse;
 import storage.zanzik01.service.ThingService;
@@ -30,6 +31,15 @@ public class ThingController {
     @ResponseStatus(HttpStatus.OK)
     public ThingDtoResponse getThingById(@PathVariable long id) {
         return ThingConverter.toThingDtoResponse(thingService.getThingById(id));
+    }
+
+    @Operation(
+            summary = "Запрос для поиска вещи по имени"
+    )
+    @GetMapping("/name/{name}")
+    @ResponseStatus(HttpStatus.OK)
+    public ThingDto getThingByName(@PathVariable String name) {
+        return ThingConverter.toThingDto(thingService.getThingByName(name).orElseThrow());
     }
 
     @Operation(

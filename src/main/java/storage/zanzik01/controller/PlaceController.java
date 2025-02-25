@@ -1,6 +1,5 @@
 package storage.zanzik01.controller;
 
-
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
@@ -41,4 +40,19 @@ public class PlaceController {
         return ResponseEntity.ok(PlaceConverter.toPlaceDtoResponse(placeService.createPlace(placeDtoRequest)));
     }
 
+    @Operation(
+            summary = "Запрос для редактирование места"
+    )
+    @PatchMapping("/{id}/name")
+    public ResponseEntity<PlaceDtoResponse> updatePlace(@PathVariable long id, @RequestBody PlaceDtoRequest placeDtoRequest) {
+        return ResponseEntity.ok(PlaceConverter.toPlaceDtoResponse(placeService.updatePlace(id, placeDtoRequest)));
+    }
+
+    @Operation(
+            summary = "Запрос для удаления места по ID"
+    )
+    @DeleteMapping("/{id}")
+    public void deletePlace(@PathVariable long id) {
+        placeService.deletePlace(id);
+    }
 }
