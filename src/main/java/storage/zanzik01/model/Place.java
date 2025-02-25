@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 import java.time.OffsetDateTime;
 
 @Getter
-@Builder
+@Builder(toBuilder = true)
 @Entity(name = "place")
 @NoArgsConstructor
 @AllArgsConstructor

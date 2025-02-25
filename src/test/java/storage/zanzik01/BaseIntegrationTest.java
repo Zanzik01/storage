@@ -38,6 +38,7 @@ public class BaseIntegrationTest {
     @BeforeEach
     void setup() {
         thingRepository.deleteAll();
+        placeRepository.deleteAll();
     }
 
     @PostConstruct
